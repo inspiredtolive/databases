@@ -52,7 +52,8 @@ DROP TABLE IF EXISTS `Rooms`;
 CREATE TABLE `Rooms` (
   `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
   `name` VARCHAR(16) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE (`name`)
 );
 -- ---
 -- Table 'Rooms'
@@ -64,7 +65,8 @@ DROP TABLE IF EXISTS `Users`;
 CREATE TABLE `Users` (
   `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
   `name` VARCHAR(16) NOT NULL DEFAULT 'anonymous',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE (`name`)
 );
 
 
