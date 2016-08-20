@@ -28,8 +28,8 @@ CREATE TABLE `Friends` (
   `user_id` INTEGER NULL DEFAULT NULL,
   `friend_id` INTEGER NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (user_id) REFERENCES `Users` (`id`),
-  FOREIGN KEY (friend_id) REFERENCES `Users` (`id`)
+  FOREIGN KEY (user_id) REFERENCES `Users` (`users_id`),
+  FOREIGN KEY (friend_id) REFERENCES `Users` (`users_id`)
 );
 
 DROP TABLE IF EXISTS `Messages`;
@@ -41,8 +41,8 @@ CREATE TABLE `Messages` (
   `room_id` INTEGER NULL DEFAULT NULL,
   `createdAt` TIMESTAMP NOT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (user_id) REFERENCES `Users` (`id`),
-  FOREIGN KEY (room_id) REFERENCES `Rooms` (`id`)
+  FOREIGN KEY (user_id) REFERENCES `Users` (`users_id`),
+  FOREIGN KEY (room_id) REFERENCES `Rooms` (`rooms_id`)
 );
 
 
@@ -50,9 +50,9 @@ DROP TABLE IF EXISTS `Rooms`;
 
 		
 CREATE TABLE `Rooms` (
-  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `rooms_id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
   `name` VARCHAR(16) NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`rooms_id`),
   UNIQUE (`name`)
 );
 -- ---
@@ -63,13 +63,13 @@ CREATE TABLE `Rooms` (
 DROP TABLE IF EXISTS `Users`;
 		
 CREATE TABLE `Users` (
-  `id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
+  `users_id` INTEGER NULL AUTO_INCREMENT DEFAULT NULL,
   `name` VARCHAR(16) NOT NULL DEFAULT 'anonymous',
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`users_id`),
   UNIQUE (`name`)
 );
 
-
+INSERT INTO `Rooms` (`name`) VALUES ('lobby'); 
 -- ---
 -- Table 'Messages'
 -- 
