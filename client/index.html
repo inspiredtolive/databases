@@ -8,31 +8,41 @@
     <!-- dependencies -->
     <script src="./jquery.js"></script>
     <!-- your scripts -->
-    <script src="env/config.js"></script>
     <script src="scripts/app.lecture.js"></script>
   </head>
   <body>
-    <div id="main">
+    <div id="loading">
       <h1>chatterbox</h1>
       <!-- Your HTML goes here! -->
-
-      <!-- <div class="spinner"><img src="images/spiffygif_46x46.gif"></div> -->
-      <div id="rooms">
-        Room:
-        <select id="roomSelect">
-        </select>
-      </div>
-      <form action="#" id="send" method="post">
-        <input type="text" name="message" id="message"/>
-        <input type="submit" name="submit" class="submit"/>
-      </form><!-- END SOLUTION -->
+      <div class="spinner"><img src="images/spiffygif_46x46.gif"></div>
     </div>
-    <div id="chats"></div>
     <!-- START SOLUTION -->
     <script>
-      $(function() {
-        app.init()
-      });
+    var getCookie = function (cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+      for (var i = 0; i <ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') {
+              c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+              return c.substring(name.length,c.length);
+          }
+      }
+      return "";
+    }
+    $(function() {
+      document.cookie = 'username=Allen';
+      if (getCookie('username') !== '') {
+        window.location = 'http://127.0.0.1:3000/main.html?username=' + getCookie('username');
+      } else {
+        window.location = 'http://127.0.0.1:3000/login.html';
+      }
+      // if (document.cookie) {
+
+      // }
+    });
     </script><!-- END SOLUTION -->
   </body>
 </html>

@@ -28,11 +28,12 @@ var app = {
     app.fetch();
 
     // poll for new messages
-    // setInterval(app.fetch, 3000);
+    setInterval(app.fetch, 3000);
 
   },
 
   fetch: function() {
+    console.log('fetching');
     $.ajax({
       url: app.server,
       type: 'GET',
@@ -40,12 +41,14 @@ var app = {
         order: '-createdAt'
       },
       success: function(data) {
+        console.log('FETCH', data);
+        data = JSON.parse(data);
         if(!data.results || !data.results.length) { return; }
 
         app.messages = data.results;
 
-        var mostRecentMessage = app.messages[app.messages.length - 1];
-
+        var mostRecentMessage = app.messages[0];
+        console.log(mostRecentMessage, app.lastMessageId)
         if (mostRecentMessage.objectId !== app.lastMessageId) {
           app.lastMessageId = mostRecentMessage.objectId;
 

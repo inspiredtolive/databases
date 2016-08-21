@@ -11,7 +11,7 @@ describe('Persistent Node Chat Server', function() {
   beforeEach(function(done) {
     dbConnection = mysql.createConnection({
       user: 'root',
-      password: 'damien',
+      password: '',
       database: 'chat'
     });
     dbConnection.connect();
@@ -28,6 +28,7 @@ describe('Persistent Node Chat Server', function() {
   });
 
   it('Should insert posted messages to the DB', function(done) {
+    console.log('do console logs work?')
     // Post the user to the chat server.
     request({
       method: 'POST',
@@ -44,6 +45,7 @@ describe('Persistent Node Chat Server', function() {
           roomname: 'Hello'
         }
       }, function () {
+        console.log('am i being called?');
         // Now if we look in the database, we should find the
         // posted message there.
 
@@ -51,9 +53,10 @@ describe('Persistent Node Chat Server', function() {
         // your message table, since this is schema-dependent.
         var queryString = 'SELECT * FROM Messages';
         var queryArgs = [];
-
+        console.log('making a query');
         dbConnection.query(queryString, queryArgs, function(err, results) {
           // Should have one result:
+          console.log('received results')
           expect(results.length).to.equal(1);
 
           // TODO: If you don't have a column named text, change this test.
